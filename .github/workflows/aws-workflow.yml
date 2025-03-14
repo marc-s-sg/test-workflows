@@ -1,0 +1,17 @@
+name: GitHub AWS Configure Credentials Demo
+on: [ workflow_dispatch ]
+permissions:
+  id-token: write
+jobs:
+  aws-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credential
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::312279720510:role/github-actions-test-workflows
+          role-session-name: TestSession 
+      - name: Whoami
+        run: aws sts get-caller-identity
+
